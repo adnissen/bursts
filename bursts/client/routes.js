@@ -5,8 +5,13 @@ Meteor.Router.add({
   },
 
   '/b/:burst': function(burst){
-  	Meteor.subscribe("bursts", burst);
+  	Meteor.subscribe("bursts", burst, function(){
+  	  var obj = Bursts.findOne({_id: burst});
+  	  Session.set("title", obj.title);
+  	  Session.set("post", obj.post);
+  	});
   	Meteor.subscribe("replies", burst);
+  	Session.set("burst", burst);
   	return 'burstPage';
   }
 });

@@ -9,6 +9,10 @@ Meteor.publish("replies", function(parentId){
   return Replies.find({parent: parentId});  
 });
 
+Meteor.publish("mostRecent", function(){
+  return Bursts.find({publicBool: true}, {sort: {timestamp: -1}, limit: 5});
+});
+
 Meteor.methods({
 
   createBurst: function(_title, _post, _public){

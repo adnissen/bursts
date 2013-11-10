@@ -3,6 +3,7 @@ Replies = new Meteor.Collection("replies");
 
 Meteor.autosubscribe(function() {
   Meteor.subscribe("mostRecent");
+  Meteor.subscribe("topPosts");
 });
 
 Template.burstPage.title = function() {
@@ -57,7 +58,11 @@ Template.home.events({
 });
 
 Template.home.recent = function() {
-  return Bursts.find();
+  return Bursts.find({publicBool: true}, {sort: {timestamp: -1}, limit: 5});
+};
+
+Template.home.top = function() {
+  return Bursts.find({publicBool: true}, {sort: {replies: -1}, limit: 5});
 };
 
 Template.home.rendered = function(){

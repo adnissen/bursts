@@ -13,12 +13,16 @@ Meteor.publish("mostRecent", function(){
   return Bursts.find({publicBool: true}, {sort: {timestamp: -1}, limit: 5});
 });
 
+Meteor.publish("topPosts", function(){
+  return Bursts.find({publicBool: true}, {sort: {replies: -1}, limit: 5});
+});
+
 Meteor.methods({
 
   createBurst: function(_title, _post, _public){
   	var time = new Date();
     	time = time.getTime();
-  	var newBurst = Bursts.insert({title: _title, post: _post, publicBool: Boolean(_public), timestamp: time});
+  	var newBurst = Bursts.insert({title: _title, post: _post, publicBool: Boolean(_public), timestamp: time, replies: 1});
     return newBurst;
   },
 
@@ -28,6 +32,7 @@ Meteor.methods({
     	var time = new Date();
     	time = time.getTime();
     	Replies.insert({parent: _parent, text: _text, timestamp: time});
+    	Bursts.update({_id: _parent}, {$inc: {replies: 1}})
     }
   }
 });

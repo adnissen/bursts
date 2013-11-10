@@ -9,6 +9,7 @@ Meteor.Router.add({
   	  var obj = Bursts.findOne({_id: burst});
   	  Session.set("title", obj.title);
   	  Session.set("post", obj.post);
+  	  document.title = obj.title;
   	});
   	Meteor.subscribe("replies", burst);
   	Session.set("burst", burst);

@@ -19,8 +19,6 @@ Meteor.methods({
   	var time = new Date();
     	time = time.getTime();
   	var newBurst = Bursts.insert({title: _title, post: _post, publicBool: Boolean(_public), timestamp: time});
-  	console.log(newBurst);
-  	console.log(Bursts.find().count());
     return newBurst;
   },
 

@@ -1,10 +1,50 @@
 <head>
   <title>bursts</title>
+  <style type="text/css" media="screen">
+  	.row
+	{
+	padding-top: 40px;
+	}
+ 	.title,
+ 	.content
+ 	{ 
+ 	outline:  0px solid transparent; 
+ 	}
+	.check,
+	.submit{
+		display: inline-block;
+		height: 0px;
+	}
+  </style>
 </head>
 
 <body>
   {{renderPage}}
 </body>
+
+<template name="home">
+<center>
+<div class="row">
+  <div class="col-md-12">
+    <div class = "burst"><h1><div class = "title" contenteditable="true">Bursts</div>
+    <small><div class = "content" contenteditable="true">click to create a burst </div></small>
+	<div class = "check"><h6><input id = "public" type = "checkbox" checked=""> Make public</h6></div>
+    <div class = "submit"><h6><button type="link" class="btnSubmit btn btn-link">Submit</button></h6></div>
+
+    </h1></div>
+    </h1>
+    <div class="row">
+      <div class="col-md-6">
+        <h3>New</h3>
+      </div>
+      <div class="col-md-6">
+       <h3>Recent</h3>
+      </div>
+    </div>
+  </div>
+</div>
+</center>
+</template>
 
 <template name="burstPage">
   <h1>{{title}}</h1>

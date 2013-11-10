@@ -30,6 +30,9 @@ Meteor.methods({
     if (!_text || /^\s*$/.test(_text)){
       return "string is empty";
     }
+    if (_text.length > 500){
+      return "string too long";
+    }
   	var parent = Bursts.findOne({_id: _parent});
     if (parent){
     	var time = new Date();

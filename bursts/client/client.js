@@ -76,9 +76,10 @@ Template.burstPage.events({
   	if (e.which == 13){
 
   		var content = $("#respond").val();
-
-  		Meteor.call("reply", content, Session.get("burst"));
-  		var content = $("#respond").val("");
+  		if (content.length <= 500){
+  		  Meteor.call("reply", content, Session.get("burst"));
+  		  var content = $("#respond").val("");
+  	    }
   	}
   }
 });

@@ -38,6 +38,14 @@ Template.home.events({
 	    count ++;
 	},
 
+	'keypress div.title': function(event){
+      return event.which != 13;
+	},
+
+    'keypress div.content': function(event){
+      return event.which != 13;
+	},
+
 	'click button.btnSubmit': function(){
 		var title = $(".title").text();
 		var content = $(".content").text();

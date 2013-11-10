@@ -6,7 +6,7 @@ Meteor.publish("bursts", function(id){
 });
 
 Meteor.publish("replies", function(parentId){
-  return Replies.find({parent: parentId});  
+  return Replies.find({parent: parentId}, {sort: {timestamp: -1}, limit: 20});  
 });
 
 Meteor.publish("mostRecent", function(){

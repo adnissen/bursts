@@ -2,7 +2,7 @@ Bursts = new Meteor.Collection("bursts");
 Replies = new Meteor.Collection("replies");
 
 Meteor.autosubscribe(function() {
-	Meteor.subscribe("mostRecent");
+  Meteor.subscribe("mostRecent");
 });
 
 Template.burstPage.title = function() {
@@ -46,10 +46,14 @@ Template.home.events({
 			Meteor.Router.to("/b/" + data);
 		});
 	}
-})
+});
+
+Template.home.recent = function() {
+  return Bursts.find();
+};
 
 Template.home.rendered = function(){
 	count = 0;
  	$(".check").hide();
  	$(".submit").hide();
-	};
+};

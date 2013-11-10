@@ -66,7 +66,24 @@ Template.home.top = function() {
 };
 
 Template.home.rendered = function(){
-	count = 0;
- 	$(".check").hide();
- 	$(".submit").hide();
+  count = 0;
+  $(".check").hide();
+  $(".submit").hide();
 };
+
+Template.burstPage.events({
+  'keypress input.form-control' : function(e){
+  	if (e.which == 13){
+
+  		var content = $("#respond").val();
+
+  		Meteor.call("reply", content, Session.get("burst"));
+  		var content = $("#respond").val("");
+  	}
+  }
+});
+
+Template.burstPage.reply = function(){
+  return Replies.find({}, {sort: {timestamp: -1}, limit: 20});  
+};
+

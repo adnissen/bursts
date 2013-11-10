@@ -1,6 +1,13 @@
 <head>
   <title>bursts</title>
-  <style type="text/css" media="screen">
+</head>
+
+<body>
+  {{renderPage}}
+</body>
+
+<template name="home">
+<style type="text/css" media="screen">
   	.row
 	{
 	padding-top: 40px;
@@ -16,20 +23,13 @@
 		height: 0px;
 	}
   </style>
-</head>
-
-<body>
-  {{renderPage}}
-</body>
-
-<template name="home">
 <center>
 <div class="row">
   <div class="col-md-12">
     <div class = "burst"><h1><div class = "title" contenteditable="true">Bursts</div>
     <small><div class = "content" contenteditable="true">click to create a burst </div></small>
-	<div class = "check"><h6><input id = "public" type = "checkbox" checked=""> Make public</h6></div>
-    <div class = "submit"><h6><button type="link" class="btnSubmit btn btn-link">Submit</button></h6></div>
+	<div class = "check"><h6><input id = "public" type = "checkbox" checked=""> Show on Homepage</h6></div><br>
+    <div class = "submit"><h6><button type="link" class="btnSubmit btn btn-warning">Submit</button></h6></div>
 
     </h1></div>
     </h1>
@@ -53,6 +53,51 @@
 </template>
 
 <template name="burstPage">
-  <h1>{{title}}</h1>
-  {{post}}
+<style type="text/css" media="screen">
+        .burst
+        {
+        padding-top: 10%;
+  		padding-bottom: 10%;
+        }
+  .input-group{
+    width: 50%;
+  }
+  #comments{
+    size : 120px;
+    padding-bottom: 0px;
+ 
+  }
+  .comment{
+     background-color: #EEE;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    border-right: 0px;
+    border-top-right-radius: 0px;  
+    border-bottom-right-radius: 0px;
+    margin-left: 2px;  
+ 	min-height: 30px;
+ 	vertical-align: 0px;
+  } 
+</style>
+  <center>
+    <div class = "burst"><h1><div class = "title">{{title}}</div>
+    <small><div class = "content">{{post}}</div></small>
+    </h1></div>
+    <hr>
+    <div class="input-group input-group-sm">
+    <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
+    <input type="text" id="respond" class="form-control" placeholder="Respond Anonymously">
+    </div>
+    {{#each reply}}
+    <br>
+		<div class="input-group" id = "comments">
+		  <div class = "comment">{{text}}
+		 </div>
+         <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+ 
+</div>
+    {{/each}}
+    <br>
+    <br>
+</center>
 </template>

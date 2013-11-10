@@ -26,6 +26,7 @@
 	.check,
 	.submit{
 		display: inline-block;
+		height: 0px;
 	}
 
 </style>
@@ -36,7 +37,7 @@
   <div class="col-md-12">
     <div class = "burst"><h1><div class = "title" contenteditable="true" onclick = "createBurst()">Bursts</div>
     <small><div class = "content" contenteditable="true" onclick = "createBurst()">click to create a burst </div></small>
-    <div class = "check"><h6><input type = "checkbox"> Make public</h6></div>
+	<div class = "check"><h6><input type = "checkbox"> Make public</h6></div>
     <div class = "submit"><h6><button type="link" class="btn btn-link">Submit</button></h6></div>
 
     </h1></div>
@@ -72,6 +73,8 @@
 	 	$(".content").text("Explanation of what a burst is here");
 	 	$(".check").show();
 	 	$(".submit").show();
+	 	$(".check").animate({height:"30px"},{queue:false});
+	 	$(".submit").animate({height:"30px"},{queue:false});
 
 	 } 
 	 count ++;

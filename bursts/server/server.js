@@ -27,6 +27,9 @@ Meteor.methods({
   },
 
   reply: function(_text, _parent){
+    if (!_text || /^\s*$/.test(_text)){
+      return "string is empty";
+    }
   	var parent = Bursts.findOne({_id: _parent});
     if (parent){
     	var time = new Date();

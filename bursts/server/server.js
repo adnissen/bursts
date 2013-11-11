@@ -26,7 +26,7 @@ Meteor.methods({
     return newBurst;
   },
 
-  reply: function(_text, _parent){
+  reply: function(_text, _parent, _clientId){
     if (!_text || /^\s*$/.test(_text)){
       return "string is empty";
     }
@@ -37,7 +37,7 @@ Meteor.methods({
     if (parent){
     	var time = new Date();
     	time = time.getTime();
-    	Replies.insert({parent: _parent, text: _text, timestamp: time});
+    	Replies.insert({parent: _parent, text: _text, timestamp: time, clientId: _clientId});
     	Bursts.update({_id: _parent}, {$inc: {replies: 1}})
     }
   }

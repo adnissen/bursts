@@ -77,7 +77,7 @@ Template.burstPage.events({
 
   		var content = $("#respond").val();
   		if (content.length <= 500){
-  		  Meteor.call("reply", content, Session.get("burst"));
+  		  Meteor.call("reply", content, Session.get("burst"), Session.get("clientId"));
   		  var content = $("#respond").val("");
   	    }
   	}

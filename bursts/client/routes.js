@@ -13,6 +13,7 @@ Meteor.Router.add({
   	});
   	Meteor.subscribe("replies", burst);
   	Session.set("burst", burst);
+    Session.set("clientId", Math.floor((Math.random() * 99999) + 10000));
   	return 'burstPage';
   }
 });

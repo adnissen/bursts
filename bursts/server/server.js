@@ -5,8 +5,10 @@ Meteor.publish("bursts", function(id){
   return Bursts.find({_id: id});
 });
 
-Meteor.publish("replies", function(parentId){
-  return Replies.find({parent: parentId}, {sort: {timestamp: -1}, limit: 20});  
+Meteor.publish("replies", function(parentId, position){
+  //we need to take in thier current position so that we can return the right amount of documents for them, but not overload them before they get to the bottom of the page
+  position = position + 20;
+  return Replies.find({parent: parentId}, {sort: {timestamp: -1}, limit: position});  
 });
 
 Meteor.publish("mostRecent", function(){

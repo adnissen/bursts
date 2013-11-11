@@ -85,6 +85,6 @@ Template.burstPage.events({
 });
 
 Template.burstPage.reply = function(){
-  return Replies.find({}, {sort: {timestamp: -1}, limit: 20});  
+  return Replies.find({}, {sort: {timestamp: -1}});  
 };
 

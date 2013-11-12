@@ -84,6 +84,15 @@ Template.burstPage.events({
   }
 });
 
+Template.burstPage.rendered = function(){
+  $(window).scroll(function() {
+    if($(window).scrollTop() + $(window).height() == $(document).height()){
+      Session.set("position", Session.get("position") + 20)
+      Meteor.subscribe("replies", Session.get("burst"), Session.get("position"));
+    }
+  });
+}
+
 Template.burstPage.reply = function(){
   return Replies.find({}, {sort: {timestamp: -1}});  
 };

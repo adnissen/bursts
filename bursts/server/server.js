@@ -1,6 +1,6 @@
 Bursts = new Meteor.Collection("bursts");
 Replies = new Meteor.Collection("replies");
-var count = 0;
+var countType = 0;
 Meteor.publish("bursts", function(id){
   return Bursts.find({_id: id});
 });
@@ -28,9 +28,9 @@ Meteor.methods({
     return newBurst;
   },
   counter: function(_count){
-    count += _count;
+    countType += _count;
     var data = {};
-    data.count = count;
+    data.count = countType;
     return data;
   },
 

@@ -73,6 +73,7 @@ Template.home.rendered = function(){
 Template.burstPage.events({
 	  'focus input.form-control' : function(){
 	  	  Meteor.call("counter", 1, function(err, data){
+	  	  	console.log(data.count);
 	  	  	if(data.count > 0){
 	  	  		$(".isTyping").show();
 	  	  	}
@@ -80,6 +81,7 @@ Template.burstPage.events({
 	  },
 	  'focusout input.form-control' : function(){
 	  	  Meteor.call("counter", -1, function(err, data){
+	  	  	console.log(data.count);
 	  	  	if(data.count < 1){
 	  	  		$(".isTyping").hide();
 	  	  	}

@@ -81,10 +81,29 @@ Template.burstPage.events({
   		  var content = $("#respond").val("");
   	    }
   	}
-  }
+  },
+  'focus input.form-control' : function(){
+    Meteor.call("isTyping", 1, Session.get("burst"), function(err, data){
+       console.log(data);
+       if(data != 0){
+				$(".isTyping").show();
+       }
+    });
+},
+ 'focusout input.form-control' : function(){
+  	console.log("There");
+    Meteor.call("isTyping", -1, Session.get("burst"), function(err, data){
+        console.log(data);
+         if(data != 0){
+					$(".isTyping").hide();
+       }
+    });
+},
 });
 
 Template.burstPage.rendered = function(){
+	$(".isTyping").hide();
+	activeTyping();
   if(!document.hasFocus()){
   	var obj = Bursts.findOne({_id: Session.get("burst")});
   	document.title = obj.title;
@@ -97,7 +116,16 @@ Template.burstPage.rendered = function(){
     }
   });
 };
-
+Template.burstPage.activeTyping = function(){
+	var typeCount = Bursts.findOne({_id: Session.get("bursts")}).typeCount
+	if(typeCount > 0){
+		$(".isTyping").show();
+	}else if(typeCount = 0){
+		$(".isTyping").hide();
+	}else{
+		typeCount = 0;
+	}
+}
 Template.burstPage.created = function(){
 	window.onfocus = function(){
 	  console.log("here we go");

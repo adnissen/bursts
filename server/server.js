@@ -23,11 +23,15 @@ Meteor.methods({
 
   createBurst: function(_title, _post, _public){
   	var time = new Date();
-    	time = time.getTime();
-  	var newBurst = Bursts.insert({title: _title, post: _post, publicBool: Boolean(_public), timestamp: time, replies: 1});
+    time = time.getTime();
+  	var newBurst = Bursts.insert({title: _title, post: _post, publicBool: Boolean(_public), timestamp: time, replies: 1, typeCount: 0});
     return newBurst;
   },
+  isTyping: function(_value, _parent){
+    newData =  Bursts.update({_id: _parent}, {$inc: {typeCount: _value}});
+    return newData;
 
+  },
   reply: function(_text, _parent, _clientId){
     if (!_text || /^\s*$/.test(_text)){
       return "string is empty";

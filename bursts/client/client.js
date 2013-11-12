@@ -85,6 +85,11 @@ Template.burstPage.events({
 });
 
 Template.burstPage.rendered = function(){
+  if(!document.hasFocus()){
+  	var obj = Bursts.findOne({_id: Session.get("burst")});
+  	document.title = obj.title;
+  	document.title = "(*)" + document.title;
+  }
   $(window).scroll(function() {
     if($(window).scrollTop() + $(window).height() == $(document).height()){
       Session.set("position", Session.get("position") + 20)
@@ -94,10 +99,15 @@ Template.burstPage.rendered = function(){
 };
 
 Template.burstPage.created = function(){
+	window.onfocus = function(){
+	  console.log("here we go");
+      var obj = Bursts.findOne({_id: Session.get("burst")});
+  	  document.title = obj.title;
+	};
 	Session.set("clientId", Math.floor((Math.random() * 99999) + 10000));
 };
 
 Template.burstPage.reply = function(){
-  return Replies.find({}, {sort: {timestamp: -1}});  
+  return Replies.find({parent: Session.get("burst")}, {sort: {timestamp: -1}});  
 };
 

@@ -1,6 +1,6 @@
 Bursts = new Meteor.Collection("bursts");
 Replies = new Meteor.Collection("replies");
-
+var count = 0;
 Meteor.autosubscribe(function() {
   Meteor.subscribe("mostRecent");
   Meteor.subscribe("topPosts");
@@ -72,6 +72,14 @@ Template.home.rendered = function(){
 };
 
 Template.burstPage.events({
+	  'focus input.form-control' : function(){
+	  		count ++;
+	  		console.log(count);
+	  },
+	  'focusout input.form-control' : function(){
+	  	  count --;
+  		  console.log(count);
+	  },
   'keypress input.form-control' : function(e){
   	if (e.which == 13){
 
@@ -79,6 +87,7 @@ Template.burstPage.events({
   		if (content.length <= 500){
   		  Meteor.call("reply", content, Session.get("burst"), Session.get("clientId"));
   		  var content = $("#respond").val("");
+
   	    }
   	}
   }

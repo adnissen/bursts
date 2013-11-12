@@ -1,6 +1,6 @@
 Bursts = new Meteor.Collection("bursts");
 Replies = new Meteor.Collection("replies");
-
+var count =0;
 Meteor.publish("bursts", function(id){
   return Bursts.find({_id: id});
 });

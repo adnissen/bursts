@@ -1,6 +1,6 @@
 Bursts = new Meteor.Collection("bursts");
 Replies = new Meteor.Collection("replies");
-
+Session.set("typeCount", 0);
 Meteor.autosubscribe(function() {
   Meteor.subscribe("mostRecent");
   Meteor.subscribe("topPosts");
@@ -84,26 +84,17 @@ Template.burstPage.events({
   },
   'focus input.form-control' : function(){
     Meteor.call("isTyping", 1, Session.get("burst"), function(err, data){
-       console.log(data);
-       if(data != 0){
-				$(".isTyping").show();
-       }
+    	 Session.set("typeCount", Bursts.findOne({_id: Session.get("burst")}).typeCount);
     });
 },
  'focusout input.form-control' : function(){
-  	console.log("There");
-    Meteor.call("isTyping", -1, Session.get("burst"), function(err, data){
-        console.log(data);
-         if(data != 0){
-					$(".isTyping").hide();
-       }
+       Meteor.call("isTyping", -1, Session.get("burst"), function(err, data){
+    	 Session.set("typeCount", Bursts.findOne({_id: Session.get("burst")}).typeCount);
     });
-},
-});
+}});
 
 Template.burstPage.rendered = function(){
 	$(".isTyping").hide();
-	activeTyping();
   if(!document.hasFocus()){
   	var obj = Bursts.findOne({_id: Session.get("burst")});
   	document.title = obj.title;
@@ -117,14 +108,7 @@ Template.burstPage.rendered = function(){
   });
 };
 Template.burstPage.activeTyping = function(){
-	var typeCount = Bursts.findOne({_id: Session.get("bursts")}).typeCount
-	if(typeCount > 0){
-		$(".isTyping").show();
-	}else if(typeCount = 0){
-		$(".isTyping").hide();
-	}else{
-		typeCount = 0;
-	}
+	return true;
 }
 Template.burstPage.created = function(){
 	window.onfocus = function(){
@@ -138,4 +122,11 @@ Template.burstPage.created = function(){
 Template.burstPage.reply = function(){
   return Replies.find({parent: Session.get("burst")}, {sort: {timestamp: -1}});  
 };
+Template.burstPage.destroyed = function () {
+    Meteor.call("isTyping", -1, Session.get("burst"), function(err, data){
+         if(data != 0){
+					$(".isTyping").hide();
+       }
+     })
+   };
 

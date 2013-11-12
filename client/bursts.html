@@ -161,14 +161,20 @@ by <a href="https://twitter.com/ambushsabre">andrew nissen</a>  & <a href="https
     <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
     <input type="text" id="respond" class="form-control" placeholder="Respond Anonymously">
     </div>
- <div class = "isTyping">
-        <br>
+    {{#if activeTyping}}
+    <div class = "isTyping">
+    <br>
     <div class="input-group" id = "comments">
 
-      <div class = "comment">.  .  .  .  . <br> <small></small>
+      <div class = "comment">
+      .  .  .  .  . 
+      <br> <small></small>
      </div>
+
          <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
     </div></div>
+          {{/if}}
+
     {{#each reply}}
     <br>
 		<div class="input-group" id = "comments">

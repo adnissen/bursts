@@ -75,10 +75,18 @@ Template.burstPage.events({
 	  'focus input.form-control' : function(){
 	  		count ++;
 	  		console.log(count);
+	  	  if(count > 0){
+	  	  	$(".isTyping").show();
+					console.log("here");
+				}
 	  },
 	  'focusout input.form-control' : function(){
 	  	  count --;
   		  console.log(count);
+  		  if(count = 0){
+  		  	$(".isTyping").hide();
+					console.log("here");
+				}
 	  },
   'keypress input.form-control' : function(e){
   	if (e.which == 13){
@@ -94,6 +102,7 @@ Template.burstPage.events({
 });
 
 Template.burstPage.rendered = function(){
+	$(".isTyping").hide();
   $(window).scroll(function() {
     if($(window).scrollTop() + $(window).height() == $(document).height()){
       Session.set("position", Session.get("position") + 20)

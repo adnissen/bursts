@@ -142,6 +142,7 @@ by <a href="https://twitter.com/ambushsabre">andrew nissen</a>  & <a href="https
   margin-bottom: 20px;
  }
 
+
    body{
     font-family: 'Sintony';
     }
@@ -159,10 +160,17 @@ by <a href="https://twitter.com/ambushsabre">andrew nissen</a>  & <a href="https
     <div class="input-group input-group-sm">
     <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
     <input type="text" id="respond" class="form-control" placeholder="Respond Anonymously">
-    </div>
+    </div><br>
+    <div class = "isTyping">
+      <div class="input-group" id = "comments">
+
+      <div class = "comment"> ....... <br> 
+     </div></div></div>
+
     {{#each reply}}
     <br>
 		<div class="input-group" id = "comments">
+
 		  <div class = "comment">{{text}}<br> <small>temporary id: {{clientId}}</small>
 		 </div>
          <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>

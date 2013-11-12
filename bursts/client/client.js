@@ -84,15 +84,18 @@ Template.burstPage.events({
   }
 });
 
-Template.burstPage.created = function(){
-	Session.set("clientId", Math.floor((Math.random() * 99999) + 10000));
+Template.burstPage.rendered = function(){
   $(window).scroll(function() {
     if($(window).scrollTop() + $(window).height() == $(document).height()){
       Session.set("position", Session.get("position") + 20)
       Meteor.subscribe("replies", Session.get("burst"), Session.get("position"));
     }
   });
-}
+};
+
+Template.burstPage.created = function(){
+	Session.set("clientId", Math.floor((Math.random() * 99999) + 10000));
+};
 
 Template.burstPage.reply = function(){
   return Replies.find({}, {sort: {timestamp: -1}});  

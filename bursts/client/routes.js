@@ -13,7 +13,6 @@ Meteor.Router.add({
   	});
 
   	Session.set("burst", burst);
-    Session.set("clientId", Math.floor((Math.random() * 99999) + 10000));
 
     //we need to reset a "position" session var here, for infinite scrolling
     //(this is the position in the database we're currently at, so we need to request this number + 20 to get the next 20 messages)

@@ -84,7 +84,8 @@ Template.burstPage.events({
   }
 });
 
-Template.burstPage.rendered = function(){
+Template.burstPage.created = function(){
+	Session.set("clientId", Math.floor((Math.random() * 99999) + 10000));
   $(window).scroll(function() {
     if($(window).scrollTop() + $(window).height() == $(document).height()){
       Session.set("position", Session.get("position") + 20)

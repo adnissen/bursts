@@ -52,7 +52,7 @@ Template.home.events({
 		var content = $(".content").text();
 		var checked = $("#public:checked").length;
 		Meteor.call("createBurst", title, content, checked, function(err, data){
-			Meteor.Router.to("/b/" + data);
+			Router.go("/b/" + data);
 		});
 	}
 });

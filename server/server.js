@@ -56,6 +56,17 @@ Meteor.publish("topPosts", function(){
   return Bursts.find({publicBool: true}, {sort: {replies: -1}, limit: 5});
 });
 
+var stringToColour = function(str) {
+
+    // str to hash
+    for (var i = 0, hash = 0; i < str.length; hash = str.charCodeAt(i++) + ((hash << 5) - hash));
+
+    // int/hash to hex
+    for (var i = 0, colour = "#"; i < 3; colour += ("00" + ((hash >> i++ * 8) & 0xFF).toString(16)).slice(-2));
+
+    return colour;
+}
+
 Meteor.methods({
 
   createBurst: function(_title, _post, _public){
@@ -77,7 +88,7 @@ Meteor.methods({
     if (parent){
       var time = new Date();
       time = time.getTime();
-      Replies.insert({parent: _parent, text: _text, timestamp: time, clientId: _clientId});
+      Replies.insert({parent: _parent, text: _text, timestamp: time, clientId: _clientId, color: stringToColour(_clientId)});
       Bursts.update({_id: _parent}, {$inc: {replies: 1}})
     }
   }

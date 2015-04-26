@@ -91,5 +91,17 @@ Meteor.methods({
       Replies.insert({parent: _parent, text: _text, timestamp: time, clientId: _clientId, color: stringToColour(_clientId)});
       Bursts.update({_id: _parent}, {$inc: {replies: 1}})
     }
+  },
+
+  getActiveBurst: function(){
+    var replies = Replies.find({}, {sort: {timestamp: -1}, limit: 30});
+    var ret;
+    replies.forEach(function(reply) {
+      parent = Bursts.findOne({_id: reply.parent});
+      if (parent.publicBool){
+        ret = parent._id;
+      }
+    });
+    return ret;
   }
 });

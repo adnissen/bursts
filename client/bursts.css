@@ -1,5 +1,7 @@
 body{
   font-family: 'Sintony';
+  height: 100%;
+  margin: 0;
 }
 .row
 {
@@ -14,8 +16,7 @@ body{
 }
 .check,
 .submit{
-  display: inline-block;
-  height: 0px;
+  display: none;
 }
 h6{
   font-family: 'Sintony', sans-serif;  
@@ -84,3 +85,8 @@ body{
 }
 footer a {color:#fff;}
 a{color:#41557A;}
+
+.hero{
+  width: 100%;
+  height: 100%;
+}

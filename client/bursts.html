@@ -10,36 +10,26 @@
 </body>
 
 <template name="home">
-<center>
-<div class="row">
-  <div class="col-md-12">
-    <div class = "burst"><div class = "title" contenteditable="true"><h1>Bursts</h1></div></div>
-    <small><div class = "content" contenteditable="true">Click here to create a new burst!  </div></small>
-    <div class = "check"><h6><input id = "public" type = "checkbox" checked=""> Show on Homepage</h6></div><br>
-    <div class = "submit"><h6><button type="link" class="btnSubmit btn btn-warning">Submit</button></h6></div>
-  </div>
+
+
+<div class="hero">
   <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-2">
-      <h3>Top</h3>
-     {{#each top}}
-       <a href="/b/{{_id}}">{{title}}</a><br>
-     {{/each}}
+    <div class="col-md-12">
+      <center>
+      <h1>A Chat for Everything</h1>
+      <h3>Anonymous bursts of conversation for any subject.</h3><br>
+      <button id="joinBurst" class="btn btn-primary">I want to join a random active Burst.</button><br><br>
+      <button id="createBurst" class="btn btn-primary">I want to create a Burst.</button>
+      <br>
+      <br>
+      <input class="submit" type="text" placeholder="title" id="title"><br>
+      <input class="submit" placeholder="topic" id="topic"><br>
+      <input class="submit" id="public" type="checkbox"> <span class="submit">Public</span><br>
+      <button class="submit btnSubmit btn btn-warning">Create New Burst</button>
+    </center>
     </div>
-    <div class="col-md-2">
-      <h3>Newest</h3>
-      {{#each recent}}
-      <a href="/b/{{_id}}">{{title}}</a><br>
-      {{/each}}
-    </div>
-    <div class="col-md-4"></div>
   </div>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4"><br><br>
-  <h6>Create a Burst and chat anonymously. Perfect for having a conversation with your twitter followers or anyone else for a short time, then dumping it. It's as easy as making a Burst.</h6></div>
-<div class="col-md-4"></div>
-</center>
 
    <footer><center> <br><div class="col-md-12">
 by <a href="https://twitter.com/ambushsabre">andrew nissen</a>  & <a href="https://twitter.com/imjen">jen lamere </a></div></center></footer>

@@ -15,46 +15,35 @@ Template.burstPage.post = function() {
 }
 
 Template.home.events({
-	'click div.content': function(){
-		if(count == 0){
-	 	$(".title").text("Title");
-	 	$(".content").text("Message");
-	 	$(".check").show();
-	 	$(".submit").show();
-	 	$(".check").animate({height:"30px"},{queue:false});
-	 	$(".submit").animate({height:"30px"},{queue:false});
-	    } 
-	    count ++;
-	},
+  'click #joinBurst': function(){
+    Meteor.call('getActiveBurst', function(e, data){
+      Router.go('/b/' + data);
+    });
+  },
 
-	'click div.title': function(){
-		if(count == 0){
-	 	$(".title").text("Title");
-	 	$(".content").text("Message");
-	 	$(".check").show();
-	 	$(".submit").show();
-	 	$(".check").animate({height:"30px"},{queue:false});
-	 	$(".submit").animate({height:"30px"},{queue:false});
-	    }
-	    count ++;
-	},
+  'click #createBurst': function(){
+    if(count == 0){
+      $(".submit").slideDown();
+    }
+    count ++;
+  },
 
-	'keypress div.title': function(event){
-      return event.which != 13;
-	},
+  'keypress div.title': function(event){
+    return event.which != 13;
+  },
 
-    'keypress div.content': function(event){
-      return event.which != 13;
-	},
+  'keypress div.content': function(event){
+    return event.which != 13;
+  },
 
-	'click button.btnSubmit': function(){
-		var title = $(".title").text();
-		var content = $(".content").text();
-		var checked = $("#public:checked").length;
-		Meteor.call("createBurst", title, content, checked, function(err, data){
-			Router.go("/b/" + data);
-		});
-	}
+  'click button.btnSubmit': function(){
+    var title = $("#title").val();
+    var content = $("#topic").val();
+    var checked = $("#public:checked").length;
+    Meteor.call("createBurst", title, content, checked, function(err, data){
+      Router.go("/b/" + data);
+    });
+  }
 });
 
 Template.home.recent = function() {
